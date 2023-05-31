@@ -8,7 +8,7 @@ Gem::Specification.new do |s|
   s.authors = ["Francesco Coda Zabetta"]
   s.email = "francesco.codazabetta@gmail.com"
   s.files = Dir["{lib}/**/*"] + ["MIT-LICENSE"]
-  s.homepage = "https://rubygems.org/gems/ecs_log_rails"
+  s.homepage = "https://github.com/vicvega/ecs_log_rails"
   s.license = "MIT"
 
   s.add_runtime_dependency "lograge"
