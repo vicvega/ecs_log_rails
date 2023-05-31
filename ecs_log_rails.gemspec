@@ -7,9 +7,8 @@ Gem::Specification.new do |s|
   s.description = "Convert rails' multi-line logging into a single line JSON formatted ECS compliant"
   s.authors = ["Francesco Coda Zabetta"]
   s.email = "francesco.codazabetta@gmail.com"
-  s.files = ["lib/ecs_log_rails.rb"]
-  s.homepage =
-    "https://rubygems.org/gems/hola"
+  s.files = Dir["{lib}/**/*"] + ["MIT-LICENSE"]
+  s.homepage = "https://rubygems.org/gems/ecs_log_rails"
   s.license = "MIT"
 
   s.add_runtime_dependency "lograge"
