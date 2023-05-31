@@ -1,7 +1,7 @@
 # Elastic Common Schema for rails' logs
+[![Gem Version](https://badge.fury.io/rb/ecs_log_rails.svg)](https://badge.fury.io/rb/ecs_log_rails)
 
 `Ecs_log_rails` convert rails' multi line log into a file where each line is a JSON compliant with [Elastic Common Schema](https://www.elastic.co/guide/en/ecs/current/index.html)
-
 
 Here is a basic example:
 ```
