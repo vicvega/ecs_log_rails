@@ -4,13 +4,13 @@ class EcsFormatter
   attr_reader :ecs_data, :data, :service_env, :service_name, :service_type
 
   def initialize(service_name:, service_type:, service_env:)
-    @ecs_data = {}
     @service_name = service_name
     @service_env = service_env
     @service_type = service_type
   end
 
   def call(data)
+    @ecs_data = {}
     @data = data
     generate_ecs
     event = LogStash::Event.new(deep_compact(ecs_data))
