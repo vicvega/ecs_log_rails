@@ -10,7 +10,6 @@ class EcsFormatter
   end
 
   def call(data)
-    @ecs_data = {}
     @data = data
     generate_ecs
     event = LogStash::Event.new(deep_compact(ecs_data))
@@ -20,6 +19,7 @@ class EcsFormatter
   private
 
   def generate_ecs
+    init_ecs
     add_http
     add_url
     add_event
@@ -29,6 +29,10 @@ class EcsFormatter
     add_rails
     add_error
     add_custom_payload
+  end
+
+  def init_ecs
+    @ecs_data = {}
   end
 
   def add_http
