@@ -88,7 +88,7 @@ class EcsFormatter
     ecs_add(:rails, {
       controller: data[:controller],
       action: data[:action],
-      params: data[:params],
+      params: data[:params].to_s,
       view_runtime: data[:view],
       db_runtime: data[:db]
     })
