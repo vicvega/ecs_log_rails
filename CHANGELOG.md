@@ -1,4 +1,6 @@
-#### 0.1.2 - current version - unreleased
+#### 0.1.3 - current version - unreleased
+
+#### 0.1.2 - 2023-06-14
 - log rails parameters as a simple string
 - Clean up code
 

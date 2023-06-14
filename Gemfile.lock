@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    ecs_log_rails (0.1.2)
+    ecs_log_rails (0.1.3)
       lograge
       logstash-event
 
