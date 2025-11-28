@@ -8,6 +8,7 @@ module EcsLogRails
 
   def setup(app)
     self.application = app
+    validate_log_correlation!
     setup_lograge
     setup_custom_payload
     setup_logger
@@ -19,7 +20,7 @@ module EcsLogRails
     application.config.lograge.keep_original_rails_log = ecs_log_rails_config.keep_original_rails_log
     # custom options
     application.config.lograge.custom_options = ->(event) do
-      {
+      options = {
         original_url: event.payload[:request]&.original_url,
         remote_ip: event.payload[:request]&.remote_ip,
         ip: event.payload[:request]&.ip,
@@ -29,6 +30,18 @@ module EcsLogRails
         exception: event.payload[:exception],
         exception_object: event.payload[:exception_object]
       }
+
+      if ecs_log_rails_config.log_correlation
+        # Note: ElasticAPM.log_ids can yield nil values, or an empty string if called without a block,
+        # when there's no active transaction/span. We use this signature to have more control.
+        ElasticAPM.log_ids do |transaction_id, span_id, trace_id|
+          options[:apm_transaction_id] = transaction_id if transaction_id
+          options[:apm_span_id] = span_id if span_id
+          options[:apm_trace_id] = trace_id if trace_id
+        end
+      end
+
+      options
     end
     Lograge.setup(application)
   end
@@ -70,6 +83,15 @@ module EcsLogRails
 
   def ecs_log_rails_config
     application.config.ecs_log_rails
+  end
+
+  def validate_log_correlation!
+    return unless ecs_log_rails_config.log_correlation
+
+    unless defined?(ElasticAPM)
+      raise "EcsLogRails log_correlation is enabled but ElasticAPM is not defined. " \
+            "Please add 'elastic-apm' gem to your Gemfile to be able to use log_correlation."
+    end
   end
 end
 require "ecs_log_rails/railtie" if defined?(Rails)

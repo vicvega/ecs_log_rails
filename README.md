@@ -39,6 +39,7 @@ The following parameters are available
 - `config.ecs_log_rails.service_name` to set `service.name` field (default: Rails application name)
 - `config.ecs_log_rails.service_env` to set `service.environment` field (default: `Rails.env`)
 - `config.ecs_log_rails.service_type` to set `service.type` field (default: `rails`)
+- `config.ecs_log_rails.log_correlation = true` to enable elastic log correlation (default: `false`, requires `elastic-apm` gem in Gemfile, raises `RuntimeError` otherwise)
 
 You can also configure additional payload, using a hook to access controller methods
 

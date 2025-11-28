@@ -10,6 +10,7 @@ module EcsLogRails
     config.ecs_log_rails.log_file = File.join("log", "ecs_log_rails.log")
     config.ecs_log_rails.service_env = Rails.env
     config.ecs_log_rails.service_type = "rails"
+    config.ecs_log_rails.log_correlation = false
 
     config.after_initialize do |app|
       app.config.ecs_log_rails.service_name ||= Rails.application.class.module_parent.name
