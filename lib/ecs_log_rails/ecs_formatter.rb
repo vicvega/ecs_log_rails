@@ -26,6 +26,7 @@ class EcsFormatter
     add_source
     add_destination
     add_service
+    add_apm_trace
     add_rails
     add_error
     add_custom_payload
@@ -81,6 +82,20 @@ class EcsFormatter
       name: service_name,
       type: service_type,
       environment: service_env
+    })
+  end
+
+  def add_apm_trace
+    ecs_add(:trace, {
+      id: data[:apm_trace_id]
+    })
+
+    ecs_add(:transaction, {
+      id: data[:apm_transaction_id]
+    })
+
+    ecs_add(:span, {
+      id: data[:apm_span_id]
     })
   end
 
