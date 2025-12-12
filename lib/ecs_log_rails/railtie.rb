@@ -13,6 +13,7 @@ module EcsLogRails
 
     config.after_initialize do |app|
       app.config.ecs_log_rails.service_name ||= Rails.application.class.module_parent.name
+      app.config.lograge.enabled = app.config.ecs_log_rails.enabled
 
       EcsLogRails.setup(app) if app.config.ecs_log_rails.enabled
     end
